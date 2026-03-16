@@ -26,6 +26,16 @@ services:
     networks:
       - hurgada-network
 
+  adminer:
+    image: adminer:latest
+    container_name: hurgada-adminer
+    ports:
+      - "9090:8080"
+    volumes:
+      - ./database:/db
+    networks:
+      - hurgada-network
+
 networks:
   hurgada-network:
     driver: bridge
