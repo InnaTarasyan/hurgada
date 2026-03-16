@@ -1,0 +1,43 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: hurgada-php
+    volumes:
+      - .:/var/www/html
+    environment:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /var/www/html/database/database.sqlite
+    networks:
+      - hurgada-network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    container_name: hurgada-nginx
+    ports:
+      - "8081:80"
+    depends_on:
+      - php
+    volumes:
+      - .:/var/www/html
+    networks:
+      - hurgada-network
+
+  adminer:
+    image: adminer:latest
+    container_name: hurgada-adminer
+    ports:
+      - "9090:8080"
+    volumes:
+      - ./database:/db
+    networks:
+      - hurgada-network
+
+networks:
+  hurgada-network:
+    driver: bridge
+
+
