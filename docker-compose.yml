@@ -1,8 +1,6 @@
 services:
   php:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
+    image: innatarasyan/hurgada-php:latest
     container_name: hurgada-php
     volumes:
       - .:/var/www/html
@@ -13,9 +11,7 @@ services:
       - hurgada-network
 
   nginx:
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
+    image: innatarasyan/hurgada-nginx:latest
     container_name: hurgada-nginx
     ports:
       - "8081:80"
