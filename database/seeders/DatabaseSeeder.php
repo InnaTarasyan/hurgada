@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
 
 		$this->call(BlogSeeder::class);
 		$this->call(HotelSeeder::class);
+
+		$this->call(RestaurantSeeder::class);
 	}
 }
