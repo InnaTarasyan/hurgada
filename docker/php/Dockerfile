@@ -1,33 +1,31 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm
 
-RUN apk add --no-cache \
-    bash \
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
     git \
     curl \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    libwebp-dev \
-    libzip-dev \
-    oniguruma-dev \
-    sqlite-dev \
-    freetype-dev \
-    icu-dev \
     zip \
     unzip \
-    exiftool
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
-    && docker-php-ext-install -j$(nproc) pdo pdo_mysql pdo_sqlite mbstring gd intl zip exif
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
-WORKDIR /var/www/html
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY . /var/www/html
+# Set working directory
+WORKDIR /var/www
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Copy project
+COPY . .
 
-EXPOSE 9000
+# Install dependencies
+RUN composer install
+
+# Permissions
+RUN chown -R www-data:www-data /var/www
 
 CMD ["php-fpm"]
-
-
-
