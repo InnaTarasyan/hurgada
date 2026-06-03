@@ -1,6 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h1 class="text-3xl font-semibold text-rose-800 gentle-italics">About Hurghada</h1>
+        <div class="text-center md:text-left">
+            <span class="section-eyebrow">Our story</span>
+            <h1 class="section-title mt-3">About the Red Sea & Hurghada</h1>
+            <p class="section-subtitle mt-2">Where ancient waters meet modern paradise.</p>
+        </div>
     </x-slot>
 
     <section class="py-10 pastel-bg">
@@ -77,7 +81,7 @@
             </div>
 
             <div>
-                <h2 class="text-2xl font-semibold text-rose-800 gentle-italics mb-4">Moments by the sea</h2>
+                <h2 class="section-title text-2xl mb-4">Moments by the sea</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 grid-align-top">
                     <figure class="image-tile">
                         <img class="image-fixed"

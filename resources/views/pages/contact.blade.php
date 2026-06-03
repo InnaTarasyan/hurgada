@@ -1,14 +1,13 @@
 <x-app-layout>
-<div class="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="py-10 md:py-14">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Page Header -->
     <div class="text-center mb-16">
-      <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mb-4" style="font-family: 'Dancing Script', cursive;">
-        Contact & Connect
-      </h1>
-      <p class="text-lg text-gray-600 italic" style="font-family: 'Crimson Text', serif;">
-        Let's create something beautiful together ✨
+      <span class="section-eyebrow">Say hello</span>
+      <h1 class="script-accent text-4xl md:text-5xl mt-4">Contact & connect</h1>
+      <p class="section-subtitle mx-auto mt-3">
+        Questions about the Red Sea, collaborations, or this blog — I'd love to hear from you ✨
       </p>
     </div>
 
@@ -17,7 +16,7 @@
       <!-- Author Information Section -->
       <div class="space-y-8">
         <!-- Author Card -->
-        <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-pink-100">
+        <div class="soft-card">
           <div class="text-center mb-8">
             <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold shadow-lg" style="font-family: 'Playfair Display', serif;">
               IT
@@ -93,7 +92,7 @@
 
       <!-- Contact Form Section -->
       <div class="space-y-8">
-        <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-pink-100">
+        <div class="soft-card">
           <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center" style="font-family: 'Playfair Display', serif;">
             Get In Touch
           </h2>

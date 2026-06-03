@@ -48,8 +48,8 @@
         <meta name="ICBM" content="27.2574, 33.8129">
         
         <!-- Theme Color -->
-        <meta name="theme-color" content="#1e40af">
-        <meta name="msapplication-TileColor" content="#1e40af">
+        <meta name="theme-color" content="#0d9488">
+        <meta name="msapplication-TileColor" content="#0d9488">
         
         <!-- Language and Region -->
         <meta name="language" content="English">
@@ -121,7 +121,7 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=Poppins:300,400,500,600,700&family=Dancing+Script:400,500,600,700&family=Playfair+Display:400,500,600,700&family=Crimson+Text:400,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=Poppins:300,400,500,600,700&family=Dancing+Script:400,500,600,700&family=Playfair+Display:400,500,600,700&family=Crimson+Text:400,600&family=Cormorant+Garamond:400,500,600,700&display=swap" rel="stylesheet" />
 
         <!-- Swiper CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -156,20 +156,20 @@
         <!-- Swiper JS -->
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     </head>
-    <body class="font-sans antialiased feminine-italic">
+    <body class="font-sans antialiased page-shell">
 
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ4M89B4"
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header class="bg-white/80 backdrop-blur-sm border-b border-blush-100">
+                    <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>
