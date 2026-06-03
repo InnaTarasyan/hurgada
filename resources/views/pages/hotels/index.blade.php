@@ -1,21 +1,12 @@
 <x-app-layout>
-    <div class="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50">
-        <!-- Hero Section -->
-        <div class="relative overflow-hidden bg-gradient-to-r from-pink-100 to-purple-100 py-16">
-            <div class="absolute inset-0 bg-white/20"></div>
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold text-pink-600 mb-4">
-                        <span class="inline-block transform hover:scale-105 transition-transform duration-300">
-                            🏨
-                        </span>
-                        Luxury Hotels in Hurghada
-                    </h1>
-                    <p class="text-lg md:text-xl text-pink-700 max-w-3xl mx-auto leading-relaxed">
-                        Discover the finest accommodations along the pristine Red Sea coast. 
-                        From luxury resorts to boutique hotels, find your perfect stay in paradise.
-                    </p>
-                </div>
+    <div>
+        <div class="relative overflow-hidden bg-gradient-to-r from-sea-50 via-blush-50 to-sand-100 py-14 md:py-16 border-b border-sea-100">
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="section-eyebrow">Where to stay</span>
+                <h1 class="section-title mt-4">🏨 Luxury by the Red Sea</h1>
+                <p class="section-subtitle mx-auto mt-3">
+                    Discover the finest accommodations along the pristine Red Sea coast — resorts and boutique hotels for your dreamy getaway.
+                </p>
             </div>
         </div>
 
