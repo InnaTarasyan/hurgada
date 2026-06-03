@@ -19,6 +19,7 @@
 
 ---
 
+
 ## Hello, lovely traveler
 
 Some seas are just *pretty*. The **Red Sea** is something else — crystal clarity, warm shallows, rainbow reefs, and light that turns every evening into a watercolor. **Hurghada** is where this diary lives: beaches, island hops, marina walks, and the kind of magic you pack in your heart long after the flight home.
