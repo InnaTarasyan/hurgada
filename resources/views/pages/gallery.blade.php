@@ -4,7 +4,7 @@
     <div class="text-center sm:text-left">
       <span class="section-eyebrow">Photo diary</span>
       <h1 class="section-title mt-4">Red Sea gallery</h1>
-      <p class="section-subtitle mt-2">Aesthetic snapshots from Hurghada — tap to enlarge.</p>
+      <p class="section-subtitle mt-2">Coral reefs, tropical fish, turquoise seas — tap to enlarge and swim through the colors.</p>
     </div>
     <div class="flex items-center justify-center gap-2 text-sm text-sea-600 font-medium">
       <span class="inline-flex h-2 w-2 rounded-full bg-sea-400 animate-pulse"></span>

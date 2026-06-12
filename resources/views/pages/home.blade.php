@@ -1,9 +1,13 @@
+@php
+  $seaImages = config('red_sea_images');
+@endphp
+
 <x-app-layout>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
 
   {{-- Editorial Hero --}}
   <section class="blog-hero min-h-[480px] sm:min-h-[520px] md:min-h-[600px] flex items-center">
-    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=2000&auto=format&fit=crop"
+    <img src="{{ $seaImages['hero'] }}"
          alt="Crystal clear Red Sea water with coral reef"
          class="blog-hero__image">
     <div class="blog-hero__overlay"></div>
@@ -90,24 +94,39 @@
     <x-section-header
       eyebrow="🐠 Underwater wonders"
       title="Life beneath the waves"
-      subtitle="The Red Sea is a living rainbow — clownfish, butterflyfish, angelfish, and coral gardens in every shade of pink, purple, and gold."
+      subtitle="The Red Sea is a living rainbow — clownfish, butterflyfish, angelfish, soft corals, and reef gardens in every shade of pink, purple, and gold."
     />
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-      @foreach([
-        ['https://images.unsplash.com/photo-1583212292453-86ce9e8547bd?q=80&w=600&auto=format&fit=crop', 'Clownfish', 'Coral orange', 'bg-coral-500/80'],
-        ['https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=600&auto=format&fit=crop', 'Butterflyfish', 'Golden yellow', 'bg-goldfish-500/80'],
-        ['https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=600&auto=format&fit=crop', 'Coral gardens', 'Pink & purple', 'bg-reef-500/80'],
-        ['https://images.unsplash.com/photo-1682687220063-4742bd7fd538?q=80&w=600&auto=format&fit=crop', 'Reef paradise', 'Lagoon blue', 'bg-lagoon-500/80'],
-      ] as [$src, $name, $tag, $tagBg])
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+      @foreach($seaImages['sealife'] as $creature)
       <article class="sealife-card group">
-        <img src="{{ $src }}" alt="{{ $name }} in the Red Sea" class="sealife-card__image group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        <img src="{{ $creature['src'] }}" alt="{{ $creature['name'] }} in the Red Sea" class="sealife-card__image group-hover:scale-105 transition-transform duration-500" loading="lazy">
         <div class="sealife-card__overlay"></div>
         <div class="sealife-card__body">
-          <h3 class="sealife-card__name">{{ $name }}</h3>
-          <span class="sealife-card__tag {{ $tagBg }}">{{ $tag }}</span>
+          <h3 class="sealife-card__name">{{ $creature['name'] }}</h3>
+          <span class="sealife-card__tag {{ $creature['tag_bg'] }}">{{ $creature['tag'] }}</span>
         </div>
       </article>
       @endforeach
+    </div>
+  </section>
+
+  {{-- Free spirit reef mosaic --}}
+  <section class="mt-14 sm:mt-16 md:mt-20">
+    <x-section-header
+      eyebrow="🌊 Free spirit of the sea"
+      title="Swim through the colors"
+      subtitle="Let the reef pull you in — turquoise lagoons, golden fish, lavender corals, and the endless blue of a traveler’s dream."
+    />
+    <div class="reef-mosaic">
+      @foreach($seaImages['mosaic'] as $tile)
+      <figure class="reef-mosaic__item {{ $tile['span'] }}">
+        <img src="{{ $tile['src'] }}" alt="{{ $tile['alt'] }}" loading="lazy">
+        <figcaption class="reef-mosaic__caption">{{ $tile['alt'] }}</figcaption>
+      </figure>
+      @endforeach
+    </div>
+    <div class="text-center mt-6 sm:mt-8">
+      <a href="{{ route('gallery.index') }}" class="btn-primary">Dive into the gallery 🪸</a>
     </div>
   </section>
 
@@ -120,21 +139,21 @@
     />
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
       <a href="{{ route('attractions.index') }}" class="travel-card group">
-        <img src="https://images.unsplash.com/photo-1582967788606-a171c1080cb0?q=80&w=800&auto=format&fit=crop" alt="Snorkeling in Red Sea" class="travel-card__image">
+        <img src="{{ $seaImages['discover'][0]['src'] }}" alt="{{ $seaImages['discover'][0]['alt'] }}" class="travel-card__image">
         <div class="travel-card__body">
           <div class="travel-card__title">Discover 🪸</div>
           <div class="travel-card__meta">Beaches, islands & coral reefs</div>
         </div>
       </a>
       <a href="{{ route('blog.index') }}" class="travel-card group">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Red Sea beach at sunset" class="travel-card__image">
+        <img src="{{ $seaImages['discover'][1]['src'] }}" alt="{{ $seaImages['discover'][1]['alt'] }}" class="travel-card__image">
         <div class="travel-card__body">
           <div class="travel-card__title">Travel Journal 📖</div>
           <div class="travel-card__meta">Tips, guides & sea stories</div>
         </div>
       </a>
       <a href="{{ route('events.index') }}" class="travel-card group sm:col-span-2 lg:col-span-1">
-        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=800&auto=format&fit=crop" alt="Beach sunset" class="travel-card__image">
+        <img src="{{ $seaImages['discover'][2]['src'] }}" alt="{{ $seaImages['discover'][2]['alt'] }}" class="travel-card__image">
         <div class="travel-card__body">
           <div class="travel-card__title">Events & Tours 🌅</div>
           <div class="travel-card__meta">Festivals, diving & desert trips</div>
@@ -150,25 +169,15 @@
     <x-section-header
       eyebrow="📸 Photo diary"
       title="Moments by the Red Sea"
-      subtitle="A scrapbook of turquoise water, pink skies, colorful corals, and sandy toes."
+      subtitle="A scrapbook of turquoise water, pink skies, colorful corals, golden fish, and sandy toes."
     />
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+      @foreach($seaImages['polaroids'] as $polaroid)
       <figure class="polaroid">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=600&auto=format&fit=crop" alt="Red Sea reef" class="polaroid__img" loading="lazy">
-        <figcaption class="polaroid__caption">Crystal waters 💎</figcaption>
+        <img src="{{ $polaroid['src'] }}" alt="{{ $polaroid['caption'] }}" class="polaroid__img" loading="lazy">
+        <figcaption class="polaroid__caption">{{ $polaroid['caption'] }}</figcaption>
       </figure>
-      <figure class="polaroid">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop" alt="Beach paradise" class="polaroid__img" loading="lazy">
-        <figcaption class="polaroid__caption">Golden hour 🌅</figcaption>
-      </figure>
-      <figure class="polaroid">
-        <img src="https://images.unsplash.com/photo-1583212292453-86ce9e8547bd?q=80&w=600&auto=format&fit=crop" alt="Underwater coral" class="polaroid__img" loading="lazy">
-        <figcaption class="polaroid__caption">Coral dreams 🪸</figcaption>
-      </figure>
-      <figure class="polaroid">
-        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=600&auto=format&fit=crop" alt="Sunset beach" class="polaroid__img" loading="lazy">
-        <figcaption class="polaroid__caption">Pink skies 🌸</figcaption>
-      </figure>
+      @endforeach
     </div>
     <div class="text-center mt-6 sm:mt-8">
       <a href="{{ route('gallery.index') }}" class="btn-secondary">View full gallery</a>
@@ -179,15 +188,9 @@
   <section class="mt-12 sm:mt-16">
     <div class="swiper hurghada-carousel rounded-2xl sm:rounded-[2rem] bg-white/80 p-3 sm:p-4 shadow-reef ring-1 ring-blush-100">
       <div class="swiper-wrapper">
-        @foreach([
-          ['https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop', 'Red Sea reef'],
-          ['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', 'Turquoise bay'],
-          ['https://images.unsplash.com/photo-1583212292453-86ce9e8547bd?q=80&w=1200&auto=format&fit=crop', 'Snorkeling paradise'],
-          ['https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=1200&auto=format&fit=crop', 'Sunset shore'],
-          ['https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200&auto=format&fit=crop', 'Tropical fish'],
-        ] as [$src, $alt])
+        @foreach($seaImages['carousel'] as $slide)
         <div class="swiper-slide">
-          <img src="{{ $src }}" class="w-full h-44 sm:h-52 md:h-64 object-cover rounded-xl sm:rounded-2xl" alt="{{ $alt }}" loading="lazy">
+          <img src="{{ $slide['src'] }}" class="w-full h-44 sm:h-52 md:h-64 object-cover rounded-xl sm:rounded-2xl" alt="{{ $slide['alt'] }}" loading="lazy">
         </div>
         @endforeach
       </div>
@@ -231,7 +234,7 @@
     if (typeof Swiper === 'undefined') return;
     new Swiper('.hurghada-carousel', {
       loop: true,
-      autoplay: { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+      autoplay: { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true },
       breakpoints: {
         320: { slidesPerView: 1, spaceBetween: 12 },
         640: { slidesPerView: 1.5, spaceBetween: 16 },
@@ -271,7 +274,7 @@
       <div class="space-y-4">
         <div class="soft-card-rose">
           <div class="text-xs font-semibold tracking-widest uppercase text-coral-600 mb-2">🤿 Travel tip</div>
-          <p class="feminine-italic text-base">Best snorkeling months: April–October, when the Red Sea is warmest and calmest — perfect for spotting colorful fish!</p>
+          <p class="feminine-italic text-base">Best snorkeling months: April–October, when the Red Sea is warmest and calmest — perfect for spotting colorful fish and coral gardens!</p>
         </div>
         <div class="soft-card">
           <div class="text-xs font-semibold tracking-widest uppercase text-blush-600 mb-2">☀️ Weather now</div>

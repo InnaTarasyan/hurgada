@@ -81,20 +81,21 @@
             </div>
 
             <div>
-                <h2 class="section-title text-2xl mb-4">Moments by the sea</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 grid-align-top">
-                    <figure class="image-tile">
-                        <img class="image-fixed"
-                             src="https://www.egyptsunmarine.com/storage/hurghada-islands.jpg?q=80&w=1200&auto=format&fit=crop" alt="Red Sea shoreline at golden hour">
+                <x-section-header
+                    eyebrow="🪸 Reef & sea"
+                    title="Moments beneath the waves"
+                    subtitle="Coral gardens, tropical fish, and turquoise horizons — the free spirit of the Red Sea in every frame."
+                    :centered="false"
+                />
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 grid-align-top">
+                    @foreach(config('red_sea_images.about') as $photo)
+                    <figure class="image-tile group overflow-hidden">
+                        <img class="image-fixed group-hover:scale-105 transition-transform duration-500"
+                             src="{{ $photo['src'] }}"
+                             alt="{{ $photo['alt'] }}"
+                             loading="lazy">
                     </figure>
-                    <figure class="image-tile">
-                        <img class="image-fixed"
-                             src="https://media-cdn.tripadvisor.com/media/photo-s/0f/d7/06/57/hurghada-marriott-beach.jpg?q=80&w=1200&auto=format&fit=crop" alt="Snorkeling over coral reefs">
-                    </figure>
-                    <figure class="image-tile">
-                        <img class="image-fixed"
-                             src="https://www.sharm-club.com/assets/images/cities/hurghada/mahmya-beach-hurghada.jpg?q=80&w=1200&auto=format&fit=crop" alt="Marina at dusk with soft lights">
-                    </figure>
+                    @endforeach
                 </div>
             </div>
         </div>
