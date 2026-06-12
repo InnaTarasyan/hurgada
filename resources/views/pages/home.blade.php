@@ -1,5 +1,13 @@
 @php
-  $seaImages = config('red_sea_images');
+  use App\Support\RedSeaImages;
+  $seaImages = [
+    'hero' => RedSeaImages::hero(),
+    'sealife' => RedSeaImages::section('sealife'),
+    'mosaic' => RedSeaImages::section('mosaic'),
+    'discover' => RedSeaImages::section('discover'),
+    'polaroids' => RedSeaImages::section('polaroids'),
+    'carousel' => RedSeaImages::section('carousel'),
+  ];
 @endphp
 
 <x-app-layout>
@@ -7,9 +15,10 @@
 
   {{-- Editorial Hero --}}
   <section class="blog-hero min-h-[480px] sm:min-h-[520px] md:min-h-[600px] flex items-center">
-    <img src="{{ $seaImages['hero'] }}"
+    <x-sea-image src="{{ $seaImages['hero'] }}"
          alt="Crystal clear Red Sea water with coral reef"
-         class="blog-hero__image">
+         class="blog-hero__image"
+         loading="eager" />
     <div class="blog-hero__overlay"></div>
     <div class="blog-hero__content w-full">
       <span class="section-eyebrow">🐠 Travel diary · Red Sea, Egypt</span>
@@ -99,7 +108,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
       @foreach($seaImages['sealife'] as $creature)
       <article class="sealife-card group">
-        <img src="{{ $creature['src'] }}" alt="{{ $creature['name'] }} in the Red Sea" class="sealife-card__image group-hover:scale-105 transition-transform duration-500" loading="lazy">
+        <x-sea-image src="{{ $creature['src'] }}" alt="{{ $creature['name'] }} in the Red Sea" class="sealife-card__image group-hover:scale-105 transition-transform duration-500" />
         <div class="sealife-card__overlay"></div>
         <div class="sealife-card__body">
           <h3 class="sealife-card__name">{{ $creature['name'] }}</h3>
@@ -120,7 +129,7 @@
     <div class="reef-mosaic">
       @foreach($seaImages['mosaic'] as $tile)
       <figure class="reef-mosaic__item {{ $tile['span'] }}">
-        <img src="{{ $tile['src'] }}" alt="{{ $tile['alt'] }}" loading="lazy">
+        <x-sea-image src="{{ $tile['src'] }}" alt="{{ $tile['alt'] }}" />
         <figcaption class="reef-mosaic__caption">{{ $tile['alt'] }}</figcaption>
       </figure>
       @endforeach
@@ -139,21 +148,21 @@
     />
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
       <a href="{{ route('attractions.index') }}" class="travel-card group">
-        <img src="{{ $seaImages['discover'][0]['src'] }}" alt="{{ $seaImages['discover'][0]['alt'] }}" class="travel-card__image">
+        <x-sea-image src="{{ $seaImages['discover'][0]['src'] }}" alt="{{ $seaImages['discover'][0]['alt'] }}" class="travel-card__image" />
         <div class="travel-card__body">
           <div class="travel-card__title">Discover 🪸</div>
           <div class="travel-card__meta">Beaches, islands & coral reefs</div>
         </div>
       </a>
       <a href="{{ route('blog.index') }}" class="travel-card group">
-        <img src="{{ $seaImages['discover'][1]['src'] }}" alt="{{ $seaImages['discover'][1]['alt'] }}" class="travel-card__image">
+        <x-sea-image src="{{ $seaImages['discover'][1]['src'] }}" alt="{{ $seaImages['discover'][1]['alt'] }}" class="travel-card__image" />
         <div class="travel-card__body">
           <div class="travel-card__title">Travel Journal 📖</div>
           <div class="travel-card__meta">Tips, guides & sea stories</div>
         </div>
       </a>
       <a href="{{ route('events.index') }}" class="travel-card group sm:col-span-2 lg:col-span-1">
-        <img src="{{ $seaImages['discover'][2]['src'] }}" alt="{{ $seaImages['discover'][2]['alt'] }}" class="travel-card__image">
+        <x-sea-image src="{{ $seaImages['discover'][2]['src'] }}" alt="{{ $seaImages['discover'][2]['alt'] }}" class="travel-card__image" />
         <div class="travel-card__body">
           <div class="travel-card__title">Events & Tours 🌅</div>
           <div class="travel-card__meta">Festivals, diving & desert trips</div>
@@ -174,7 +183,7 @@
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
       @foreach($seaImages['polaroids'] as $polaroid)
       <figure class="polaroid">
-        <img src="{{ $polaroid['src'] }}" alt="{{ $polaroid['caption'] }}" class="polaroid__img" loading="lazy">
+        <x-sea-image src="{{ $polaroid['src'] }}" alt="{{ $polaroid['caption'] }}" class="polaroid__img" />
         <figcaption class="polaroid__caption">{{ $polaroid['caption'] }}</figcaption>
       </figure>
       @endforeach
@@ -190,7 +199,7 @@
       <div class="swiper-wrapper">
         @foreach($seaImages['carousel'] as $slide)
         <div class="swiper-slide">
-          <img src="{{ $slide['src'] }}" class="w-full h-44 sm:h-52 md:h-64 object-cover rounded-xl sm:rounded-2xl" alt="{{ $slide['alt'] }}" loading="lazy">
+          <x-sea-image src="{{ $slide['src'] }}" class="w-full h-44 sm:h-52 md:h-64 object-cover rounded-xl sm:rounded-2xl" alt="{{ $slide['alt'] }}" />
         </div>
         @endforeach
       </div>

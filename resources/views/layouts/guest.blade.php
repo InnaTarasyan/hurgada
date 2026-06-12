@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased feminine-italic">
         <!-- Background with floating bubbles -->
-        <div class="min-h-screen relative overflow-hidden pastel-bg">
+        <div class="site-layout relative overflow-hidden pastel-bg">
             <!-- Floating decorative bubbles -->
             <div class="hero-bubble w-16 h-16 sm:w-32 sm:h-32 top-10 left-4 sm:left-10 animate-float"></div>
             <div class="hero-bubble w-12 h-12 sm:w-24 sm:h-24 top-1/3 right-4 sm:right-16 animate-float" style="animation-delay: -2s;"></div>
@@ -24,7 +24,7 @@
             <div class="hero-bubble w-10 h-10 sm:w-20 sm:h-20 top-1/2 right-1/3 animate-float" style="animation-delay: -1s;"></div>
             
             <!-- Main content -->
-            <div class="relative z-10 min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            <div class="relative z-10 flex-1 flex flex-col sm:justify-center items-center pt-6 sm:pt-0 w-full">
                 <!-- Logo section -->
                 <div class="mb-6 sm:mb-8">
                     <a href="/" class="block transform hover:scale-105 transition-transform duration-300">
@@ -44,9 +44,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <x-footer />
+            <x-footer />
+        </div>
     </body>
 </html>

@@ -165,7 +165,7 @@
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-        <div class="min-h-screen content-above-ambience">
+        <div class="site-layout content-above-ambience">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -178,7 +178,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-1 w-full">
                 {{ $slot }}
             </main>
 

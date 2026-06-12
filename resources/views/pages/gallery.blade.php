@@ -20,11 +20,10 @@
         href="{{ $image['src'] }}"
         data-lightbox="gallery"
         data-title="{{ $image['alt'] }}">
-        <img
+        <x-sea-image
           src="{{ $image['thumb'] }}"
           alt="{{ $image['alt'] }}"
-          loading="lazy"
-          class="w-full h-auto hover:scale-[1.02] transition duration-500 ease-out">
+          class="w-full h-auto hover:scale-[1.02] transition duration-500 ease-out" />
       </a>
     @endforeach
   </div>

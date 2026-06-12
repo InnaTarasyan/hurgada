@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Support\RedSeaImages;
 use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
@@ -28,15 +28,7 @@ class GalleryController extends Controller
         })->filter(fn ($img) => $img['src'])->values()->all();
 
         if (empty($images)) {
-            $images = collect(config('red_sea_images.gallery_fallback'))
-                ->map(fn (array $img) => [
-                    'src' => $img['src'],
-                    'thumb' => str_replace('w=1600', 'w=600', $img['src']),
-                    'width' => 1600,
-                    'height' => 1066,
-                    'alt' => $img['alt'],
-                ])
-                ->all();
+            $images = RedSeaImages::section('gallery_fallback');
         }
 
         return view('pages.gallery', compact('images'));

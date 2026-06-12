@@ -1,5 +1,5 @@
-<div class="wave-divider wave-divider--footer" aria-hidden="true"></div>
-<footer class="footer-gradient border-t border-blush-100/60 mt-0">
+<footer class="site-footer footer-gradient border-t border-blush-100/60">
+    <div class="site-footer__wave" aria-hidden="true"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
             <!-- Brand -->

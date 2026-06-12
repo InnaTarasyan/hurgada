@@ -88,12 +88,11 @@
                     :centered="false"
                 />
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 grid-align-top">
-                    @foreach(config('red_sea_images.about') as $photo)
+                    @foreach(\App\Support\RedSeaImages::section('about') as $photo)
                     <figure class="image-tile group overflow-hidden">
-                        <img class="image-fixed group-hover:scale-105 transition-transform duration-500"
+                        <x-sea-image class="image-fixed group-hover:scale-105 transition-transform duration-500"
                              src="{{ $photo['src'] }}"
-                             alt="{{ $photo['alt'] }}"
-                             loading="lazy">
+                             alt="{{ $photo['alt'] }}" />
                     </figure>
                     @endforeach
                 </div>
