@@ -29,6 +29,34 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+// Fish cursor companion — desktop only, respects reduced motion
+if (window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) {
+	const companion = document.createElement('div');
+	companion.className = 'fish-cursor-companion';
+	companion.setAttribute('aria-hidden', 'true');
+	companion.textContent = '🐠';
+	document.body.appendChild(companion);
+
+	let mouseX = -100;
+	let mouseY = -100;
+	let posX = -100;
+	let posY = -100;
+
+	document.addEventListener('mousemove', (e) => {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+	});
+
+	const animate = () => {
+		posX += (mouseX - posX) * 0.15;
+		posY += (mouseY - posY) * 0.15;
+		const flip = mouseX < posX ? 'scaleX(-1)' : 'scaleX(1)';
+		companion.style.transform = `translate(${posX + 14}px, ${posY + 14}px) ${flip}`;
+		requestAnimationFrame(animate);
+	};
+	requestAnimationFrame(animate);
+}
+
 // Initialize Masonry + ImagesLoaded + Lightbox2 when a gallery exists on the page
 document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery[data-masonry]');

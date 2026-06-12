@@ -48,8 +48,8 @@
         <meta name="ICBM" content="27.2574, 33.8129">
         
         <!-- Theme Color -->
-        <meta name="theme-color" content="#0d9488">
-        <meta name="msapplication-TileColor" content="#0d9488">
+        <meta name="theme-color" content="#14b8a6">
+        <meta name="msapplication-TileColor" content="#f43f5e">
         
         <!-- Language and Region -->
         <meta name="language" content="English">
@@ -156,14 +156,16 @@
         <!-- Swiper JS -->
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     </head>
-    <body class="font-sans antialiased page-shell">
+    <body class="font-sans antialiased page-shell fish-cursor">
+
+    <x-sea-ambience />
 
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQ4M89B4"
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-        <div class="min-h-screen">
+        <div class="min-h-screen content-above-ambience">
             @include('layouts.navigation')
 
             <!-- Page Heading -->

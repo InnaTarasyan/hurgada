@@ -6,27 +6,112 @@
   :root {
     --brand-sea: theme(colors.sea.600);
     --brand-blush: theme(colors.blush.500);
+    --brand-coral: theme(colors.coral.500);
+    --brand-reef: theme(colors.reef.400);
     --brand-sand: theme(colors.sand.100);
+    --fish-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cellipse cx='14' cy='14' rx='10' ry='6' fill='%23ff8a6b'/%3E%3Cpath d='M4 14 L0 10 L0 18 Z' fill='%23f43f5e'/%3E%3Cellipse cx='10' cy='13' rx='1.5' ry='2.5' fill='white'/%3E%3Cellipse cx='16' cy='13' rx='1.5' ry='2.5' fill='white'/%3E%3Ccircle cx='20' cy='12' r='1.5' fill='%23134e4a'/%3E%3C/svg%3E") 6 14, auto;
+    --fish-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='16' rx='12' ry='7' fill='%23f97066'/%3E%3Cpath d='M4 16 L-1 11 L-1 21 Z' fill='%23e11d48'/%3E%3Cellipse cx='11' cy='15' rx='2' ry='3' fill='white'/%3E%3Cellipse cx='18' cy='15' rx='2' ry='3' fill='white'/%3E%3Ccircle cx='23' cy='14' r='2' fill='%23115e59'/%3E%3Ccircle cx='24' cy='13' r='0.8' fill='white'/%3E%3C/svg%3E") 4 16, pointer;
   }
 
   body {
     @apply text-sea-900/90 antialiased;
+  }
+
+  /* Fish cursor — desktop only, respects reduced motion */
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    body.fish-cursor,
+    body.fish-cursor *:not(input):not(textarea):not(select) {
+      cursor: var(--fish-cursor);
+    }
+
+    body.fish-cursor a,
+    body.fish-cursor button,
+    body.fish-cursor [role="button"],
+    body.fish-cursor label[for],
+    body.fish-cursor .btn-primary,
+    body.fish-cursor .btn-secondary {
+      cursor: var(--fish-pointer);
+    }
+
+    body.fish-cursor input,
+    body.fish-cursor textarea,
+    body.fish-cursor select {
+      cursor: text;
+    }
   }
 }
 
 @layer components {
   /* Page backgrounds */
   .pastel-bg {
-    @apply bg-sea-gradient bg-dot-grid;
+    @apply bg-reef-gradient bg-dot-grid;
   }
 
   .page-shell {
-    @apply min-h-screen bg-sand-50 bg-dot-grid;
+    @apply min-h-screen bg-reef-gradient bg-dot-grid;
+    background-attachment: fixed;
+  }
+
+  /* Floating sealife ambience */
+  .sea-ambience {
+    @apply fixed inset-0 overflow-hidden pointer-events-none z-0;
+  }
+
+  .sea-ambience__fish {
+    @apply absolute text-2xl md:text-3xl opacity-20 md:opacity-30 select-none;
+    filter: drop-shadow(0 2px 4px rgba(13, 148, 136, 0.15));
+  }
+
+  .sea-ambience__fish--1 {
+    top: 12%;
+    left: 4%;
+    animation: swim 10s ease-in-out infinite;
+  }
+
+  .sea-ambience__fish--2 {
+    top: 55%;
+    right: 6%;
+    animation: swim 12s ease-in-out infinite 2s;
+    @apply hidden sm:block;
+  }
+
+  .sea-ambience__fish--3 {
+    bottom: 18%;
+    left: 8%;
+    animation: drift 14s ease-in-out infinite 1s;
+    @apply hidden md:block;
+  }
+
+  .sea-ambience__bubble {
+    @apply absolute rounded-full border border-white/60;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(165,243,252,0.3));
+    animation: bubbleRise 8s ease-in-out infinite;
+  }
+
+  .sea-ambience__bubble--1 { width: 14px; height: 14px; bottom: 10%; left: 15%; animation-delay: 0s; }
+  .sea-ambience__bubble--2 { width: 10px; height: 10px; bottom: 20%; right: 20%; animation-delay: 2s; @apply hidden sm:block; }
+  .sea-ambience__bubble--3 { width: 18px; height: 18px; bottom: 8%; right: 10%; animation-delay: 4s; @apply hidden md:block; }
+
+  .sea-ambience__coral {
+    @apply absolute bottom-0 w-16 h-20 opacity-[0.15] md:opacity-20;
+    background: linear-gradient(to top, #f0abfc, #fda4af, transparent);
+    border-radius: 50% 50% 0 0;
+  }
+
+  .sea-ambience__coral--1 { left: 2%; transform: skewX(-8deg); @apply hidden lg:block; }
+  .sea-ambience__coral--2 { right: 3%; transform: skewX(8deg) scaleX(0.8); @apply hidden lg:block; }
+
+  /* Fish cursor companion trail */
+  .fish-cursor-companion {
+    @apply fixed pointer-events-none z-[9999] text-xl select-none;
+    transition: transform 0.12s ease-out;
+    filter: drop-shadow(0 2px 6px rgba(249, 112, 102, 0.4));
+    will-change: transform;
   }
 
   /* Hero — editorial travel blog */
   .blog-hero {
-    @apply relative overflow-hidden rounded-[2rem] shadow-polaroid;
+    @apply relative overflow-hidden rounded-[2rem] shadow-reef;
   }
 
   .blog-hero__image {
@@ -36,50 +121,50 @@
   .blog-hero__overlay {
     background: linear-gradient(
       180deg,
-      rgba(15, 118, 110, 0.25) 0%,
-      rgba(255, 245, 247, 0.55) 45%,
-      rgba(253, 251, 247, 0.92) 100%
+      rgba(8, 145, 178, 0.3) 0%,
+      rgba(244, 63, 94, 0.12) 35%,
+      rgba(255, 245, 247, 0.55) 55%,
+      rgba(253, 251, 247, 0.94) 100%
     );
     @apply absolute inset-0;
   }
 
   .blog-hero__content {
-    @apply relative z-10 text-center py-16 md:py-28 px-6 md:px-12;
+    @apply relative z-10 text-center py-14 sm:py-16 md:py-28 px-5 sm:px-6 md:px-12;
   }
 
   .hero-bubble {
     @apply absolute rounded-full blur-xl animate-float pointer-events-none;
   }
 
-  .hero-bubble--sea {
-    @apply bg-sea-300/30;
-  }
-
-  .hero-bubble--blush {
-    @apply bg-blush-200/40;
-  }
+  .hero-bubble--sea { @apply bg-lagoon-300/40; }
+  .hero-bubble--blush { @apply bg-blush-300/45; }
+  .hero-bubble--coral { @apply bg-coral-300/35; }
+  .hero-bubble--reef { @apply bg-reef-300/30; }
 
   /* Labels & typography */
   .section-eyebrow {
     @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase;
-    @apply bg-white/80 text-sea-700 ring-1 ring-sea-200/60 shadow-sm font-sans;
+    @apply bg-white/85 text-sea-700 ring-1 ring-blush-200/70 shadow-sm font-sans;
+    background-image: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,253,250,0.9));
   }
 
   .section-title {
-    @apply font-playfair text-3xl md:text-4xl font-semibold text-sea-800 tracking-tight;
+    @apply font-playfair text-2xl sm:text-3xl md:text-4xl font-semibold text-sea-800 tracking-tight;
   }
 
   .section-subtitle {
-    @apply font-crimson text-lg text-sea-700/80 italic max-w-2xl;
+    @apply font-crimson text-base sm:text-lg text-sea-700/80 italic max-w-2xl px-2 sm:px-0;
   }
 
   .script-accent {
-    @apply font-dancing text-2xl md:text-3xl text-blush-500;
+    @apply font-dancing text-xl sm:text-2xl md:text-3xl text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #f43f5e 0%, #d946ef 50%, #14b8a6 100%);
   }
 
   .feminine-italic {
     font-family: 'Cormorant Garamond', 'Playfair Display', 'Crimson Text', ui-serif, Georgia, serif;
-    @apply text-lg leading-relaxed text-sea-900/85;
+    @apply text-base sm:text-lg leading-relaxed text-sea-900/85;
   }
 
   .gentle-italics {
@@ -89,37 +174,61 @@
 
   /* Cards */
   .soft-card {
-    @apply rounded-2xl bg-white/95 p-6 md:p-8 shadow-card ring-1 ring-blush-100/80 backdrop-blur-sm;
+    @apply rounded-2xl bg-white/95 p-5 sm:p-6 md:p-8 shadow-reef ring-1 ring-blush-100/80 backdrop-blur-sm;
   }
 
   .soft-card-rose {
-    @apply rounded-2xl bg-gradient-to-br from-blush-50 to-sea-50 p-6 shadow-sm ring-1 ring-blush-100;
+    @apply rounded-2xl bg-gradient-to-br from-blush-50 via-white to-lagoon-50 p-5 sm:p-6 shadow-sm ring-1 ring-blush-100;
   }
 
   .travel-card {
     @apply block rounded-2xl bg-white overflow-hidden shadow-card ring-1 ring-sea-100/60;
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-polaroid hover:ring-sea-200;
+    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-reef hover:ring-blush-200;
   }
 
   .travel-card__image {
-    @apply w-full h-48 md:h-52 object-cover transition-transform duration-500 group-hover:scale-105;
+    @apply w-full h-44 sm:h-48 md:h-52 object-cover transition-transform duration-500 group-hover:scale-105;
   }
 
-  .travel-card__body {
-    @apply p-5;
-  }
+  .travel-card__body { @apply p-4 sm:p-5; }
 
   .travel-card__title {
-    @apply font-playfair text-xl font-semibold text-sea-800 group-hover:text-sea-600 transition-colors;
+    @apply font-playfair text-lg sm:text-xl font-semibold text-sea-800 group-hover:text-coral-600 transition-colors;
   }
 
   .travel-card__meta {
     @apply text-sm text-blush-600/80 font-sans mt-1;
   }
 
+  /* Sealife showcase cards */
+  .sealife-card {
+    @apply relative rounded-2xl overflow-hidden shadow-card ring-1 ring-white/60;
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-reef;
+  }
+
+  .sealife-card__image {
+    @apply w-full h-40 sm:h-44 object-cover;
+  }
+
+  .sealife-card__overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-sea-900/75 via-sea-900/20 to-transparent;
+  }
+
+  .sealife-card__body {
+    @apply absolute bottom-0 left-0 right-0 p-4 text-white;
+  }
+
+  .sealife-card__name {
+    @apply font-playfair text-lg font-semibold;
+  }
+
+  .sealife-card__tag {
+    @apply inline-block mt-1 px-2.5 py-0.5 rounded-full text-xs font-semibold backdrop-blur-sm;
+  }
+
   .blog-post-card {
     @apply flex flex-col md:flex-row gap-0 md:gap-6 rounded-2xl bg-white overflow-hidden shadow-card ring-1 ring-sea-100/50;
-    @apply transition-all duration-300 hover:shadow-polaroid hover:ring-sea-200;
+    @apply transition-all duration-300 hover:shadow-reef hover:ring-blush-200;
   }
 
   .blog-post-card__thumb {
@@ -127,24 +236,23 @@
   }
 
   .blog-post-card__content {
-    @apply p-6 flex flex-col justify-center flex-1;
+    @apply p-5 sm:p-6 flex flex-col justify-center flex-1;
   }
 
   /* Polaroid / scrapbook */
   .polaroid {
-    @apply bg-white p-3 pb-10 rounded-sm shadow-polaroid rotate-[-1.5deg] transition-transform duration-300 hover:rotate-0 hover:scale-[1.02];
+    @apply bg-white p-2.5 sm:p-3 pb-8 sm:pb-10 rounded-sm shadow-polaroid rotate-[-1.5deg] transition-transform duration-300 hover:rotate-0 hover:scale-[1.03];
   }
 
-  .polaroid:nth-child(even) {
-    @apply rotate-[1.5deg];
-  }
+  .polaroid:nth-child(even) { @apply rotate-[1.5deg]; }
+  .polaroid:nth-child(3n) { @apply rotate-[0.5deg]; }
 
   .polaroid__img {
     @apply w-full aspect-[4/5] object-cover rounded-sm;
   }
 
   .polaroid__caption {
-    @apply mt-3 text-center font-dancing text-lg text-sea-700;
+    @apply mt-2 sm:mt-3 text-center font-dancing text-base sm:text-lg text-sea-700;
   }
 
   .image-tile {
@@ -165,7 +273,8 @@
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     line-height: 0.85;
     font-family: 'Playfair Display', ui-serif, Georgia, serif;
-    @apply text-sea-600 font-semibold not-italic;
+    @apply text-transparent bg-clip-text font-semibold not-italic;
+    background-image: linear-gradient(135deg, #0d9488, #f43f5e);
   }
 
   .drop-cap-center {
@@ -176,49 +285,81 @@
 
   /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-full px-7 py-3 font-semibold text-white text-sm;
-    @apply bg-gradient-to-r from-sea-500 to-sea-600 hover:from-sea-600 hover:to-sea-700;
-    @apply shadow-card hover:shadow-polaroid transition-all duration-300 hover:scale-[1.02];
+    @apply inline-flex items-center justify-center rounded-full px-6 sm:px-7 py-3 font-semibold text-white text-sm;
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 40%, #e11d48 100%);
+    background-size: 200% 200%;
+    @apply shadow-coral hover:shadow-reef transition-all duration-300 hover:scale-[1.03];
+  }
+
+  .btn-primary:hover {
+    background-position: 100% 0;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-full px-7 py-3 font-semibold text-sm;
-    @apply bg-white/90 text-sea-700 ring-1 ring-sea-200 hover:bg-white hover:ring-sea-300;
+    @apply inline-flex items-center justify-center rounded-full px-6 sm:px-7 py-3 font-semibold text-sm;
+    @apply bg-white/90 text-sea-700 ring-1 ring-blush-200 hover:bg-blush-50 hover:ring-blush-300;
     @apply shadow-sm hover:shadow-md transition-all duration-300;
   }
 
   /* Nav */
   .site-nav {
-    @apply sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-blush-100/80 shadow-sm;
+    @apply sticky top-0 z-50 border-b border-blush-100/80 shadow-sm;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(240,253,250,0.88) 50%, rgba(255,245,247,0.9) 100%);
+    backdrop-filter: blur(12px);
   }
 
   .nav-brand-title {
-    @apply font-playfair text-lg font-semibold text-sea-800 leading-tight;
+    @apply font-playfair text-base sm:text-lg font-semibold text-sea-800 leading-tight;
   }
 
   .nav-brand-tagline {
-    @apply font-dancing text-sm text-blush-500 -mt-0.5;
+    @apply font-dancing text-xs sm:text-sm text-blush-500 -mt-0.5;
   }
 
   /* Wave divider */
   .wave-divider {
-    height: 48px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48' preserveAspectRatio='none'%3E%3Cpath fill='%23f0fdfa' d='M0 24c150-24 350 24 600 12s450-12 600 12v24H0z'/%3E%3C/svg%3E") repeat-x;
-    background-size: 100% 48px;
+    height: 56px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 56' preserveAspectRatio='none'%3E%3Cpath fill='%23f0fdfa' d='M0 28c120-20 280 20 480 10s400-10 600 14 120-4 120 4v14H0z'/%3E%3Cpath fill='%23fda4b8' fill-opacity='0.15' d='M0 36c150-16 350 16 600 8s450-8 600 10v10H0z'/%3E%3C/svg%3E") repeat-x;
+    background-size: 100% 56px;
+  }
+
+  .wave-divider--footer {
+    @apply -mt-1;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 56' preserveAspectRatio='none'%3E%3Cpath fill='%23faf6ef' d='M0 28c120-20 280 20 480 10s400-10 600 14 120-4 120 4v14H0z'/%3E%3Cpath fill='%23f0abfc' fill-opacity='0.12' d='M0 36c150-16 350 16 600 8s450-8 600 10v10H0z'/%3E%3C/svg%3E") repeat-x;
+    background-size: 100% 56px;
   }
 
   /* Red Sea highlight strip */
   .sea-fact-strip {
-    @apply rounded-2xl bg-gradient-to-r from-sea-600 via-sea-500 to-teal-500 p-6 md:p-8 text-white;
+    @apply rounded-2xl p-5 sm:p-6 md:p-8 text-white relative overflow-hidden;
+    background: linear-gradient(135deg, #0891b2 0%, #14b8a6 25%, #f43f5e 55%, #d946ef 80%, #f59e0b 100%);
+    background-size: 200% 200%;
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  .sea-fact-strip::before {
+    content: '';
+    @apply absolute inset-0 opacity-20;
+    background: radial-gradient(circle at 20% 50%, white 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, white 0%, transparent 40%);
   }
 
   .sea-fact-strip__number {
-    @apply font-playfair text-4xl md:text-5xl font-bold opacity-90;
+    @apply relative font-playfair text-3xl sm:text-4xl md:text-5xl font-bold;
+  }
+
+  /* Coral reef color chips */
+  .reef-palette {
+    @apply flex flex-wrap justify-center gap-2 sm:gap-3;
+  }
+
+  .reef-palette__chip {
+    @apply w-10 h-10 sm:w-12 sm:h-12 rounded-full ring-2 ring-white shadow-md transition-transform hover:scale-110;
   }
 
   /* Footer */
   .footer-gradient {
-    background: linear-gradient(180deg, #f0fdfa 0%, #fff5f7 50%, #faf6ef 100%);
+    background: linear-gradient(180deg, #ecfeff 0%, #f0fdfa 25%, #fff5f7 55%, #fdf4ff 80%, #faf6ef 100%);
   }
 
   .shadow-soft {
@@ -232,12 +373,10 @@
 
   .auth-input {
     @apply block w-full px-4 py-3 bg-white/80 backdrop-blur-sm border border-sea-200 rounded-2xl text-sea-900 placeholder-sea-400;
-    @apply focus:border-sea-400 focus:ring-2 focus:ring-sea-200 focus:outline-none transition-all duration-300;
+    @apply focus:border-blush-400 focus:ring-2 focus:ring-blush-200 focus:outline-none transition-all duration-300;
   }
 
-  .auth-button {
-    @apply btn-primary;
-  }
+  .auth-button { @apply btn-primary; }
 
   .auth-label {
     @apply block font-medium text-sm text-sea-800 mb-2 font-crimson italic;
@@ -260,10 +399,29 @@
     @apply text-sea-900/90 font-crimson;
   }
 
+  /* Traveler quote ribbon */
+  .traveler-ribbon {
+    @apply inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium;
+    background: linear-gradient(90deg, rgba(255,235,230,0.9), rgba(240,253,250,0.9), rgba(253,244,255,0.9));
+    @apply ring-1 ring-blush-200/60 text-sea-700;
+  }
+
   @media (max-width: 640px) {
     .auth-form-container { @apply p-4 mx-2; }
-    .hero-bubble { @apply w-16 h-16; }
+    .hero-bubble { @apply w-12 h-12 sm:w-16 sm:h-16; }
     .polaroid { @apply rotate-0; }
+    .sea-ambience__fish { @apply text-xl opacity-[0.15]; }
+    .blog-hero { @apply min-h-0 rounded-3xl; }
+    .fish-cursor-companion { @apply hidden; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sea-ambience__fish,
+    .sea-ambience__bubble,
+    .sea-fact-strip,
+    .hero-bubble {
+      animation: none !important;
+    }
   }
 }
 
@@ -287,10 +445,18 @@
   }
 
   .text-gradient-sea {
-    @apply bg-gradient-to-r from-sea-700 via-sea-600 to-teal-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-sea-700 via-coral-500 to-reef-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-coral {
+    @apply bg-gradient-to-r from-coral-500 via-blush-500 to-reef-400 bg-clip-text text-transparent;
   }
 
   .grid-align-top {
     align-items: start;
+  }
+
+  .content-above-ambience {
+    @apply relative z-10;
   }
 }

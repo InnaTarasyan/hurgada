@@ -19,6 +19,33 @@ export default {
                 cormorant: ['Cormorant Garamond', 'serif'],
             },
             colors: {
+                lagoon: {
+                    50: '#ecfeff',
+                    100: '#cffafe',
+                    200: '#a5f3fc',
+                    300: '#67e8f9',
+                    400: '#22d3ee',
+                    500: '#06b6d4',
+                    600: '#0891b2',
+                    700: '#0e7490',
+                },
+                reef: {
+                    50: '#fdf4ff',
+                    100: '#fae8ff',
+                    200: '#f5d0fe',
+                    300: '#f0abfc',
+                    400: '#e879f9',
+                    500: '#d946ef',
+                    600: '#c026d3',
+                    700: '#a21caf',
+                },
+                anemone: {
+                    200: '#fecdd3',
+                    300: '#fda4af',
+                    400: '#fb7185',
+                    500: '#f43f5e',
+                    600: '#e11d48',
+                },
                 sea: {
                     50: '#f0fdfa',
                     100: '#ccfbf1',
@@ -75,23 +102,38 @@ export default {
                     800: '#921651',
                     900: '#791545',
                 },
+                goldfish: {
+                    300: '#fde68a',
+                    400: '#fbbf24',
+                    500: '#f59e0b',
+                    600: '#d97706',
+                },
             },
             boxShadow: {
                 soft: '0 10px 30px -10px rgba(244, 114, 182, 0.35)',
                 polaroid: '0 4px 20px rgba(15, 118, 110, 0.12), 0 8px 32px rgba(0, 0, 0, 0.06)',
                 card: '0 8px 30px -12px rgba(13, 148, 136, 0.2)',
+                coral: '0 8px 32px -8px rgba(249, 112, 102, 0.35)',
+                reef: '0 12px 40px -12px rgba(217, 70, 239, 0.2), 0 4px 16px -4px rgba(13, 148, 136, 0.15)',
             },
             backgroundImage: {
-                'dot-grid': 'radial-gradient(circle, #fecdd9 1px, transparent 1px)',
-                'sea-gradient': 'linear-gradient(135deg, #f0fdfa 0%, #fff5f7 40%, #faf6ef 100%)',
-                'hero-overlay': 'linear-gradient(to bottom, rgba(15, 118, 110, 0.15) 0%, rgba(255, 245, 247, 0.85) 70%, #fdfbf7 100%)',
+                'dot-grid': 'radial-gradient(circle, #fda4b8 0.8px, transparent 0.8px)',
+                'sea-gradient': 'linear-gradient(135deg, #ecfeff 0%, #f0fdfa 20%, #fff5f7 45%, #fdf4ff 70%, #faf6ef 100%)',
+                'reef-gradient': 'linear-gradient(160deg, #cffafe 0%, #f0fdfa 25%, #ffe8ee 55%, #fae8ff 80%, #faf6ef 100%)',
+                'hero-overlay': 'linear-gradient(to bottom, rgba(8, 145, 178, 0.2) 0%, rgba(255, 245, 247, 0.6) 50%, rgba(253, 251, 247, 0.95) 100%)',
+                'coral-strip': 'linear-gradient(90deg, #f97066 0%, #f43f5e 25%, #d946ef 50%, #14b8a6 75%, #06b6d4 100%)',
             },
             backgroundSize: {
-                'dot-grid': '24px 24px',
+                'dot-grid': '22px 22px',
             },
             animation: {
                 float: 'float 6s ease-in-out infinite',
                 'fade-up': 'fadeUp 0.8s ease-out forwards',
+                swim: 'swim 8s ease-in-out infinite',
+                drift: 'drift 12s ease-in-out infinite',
+                shimmer: 'shimmer 3s ease-in-out infinite',
+                'bubble-rise': 'bubbleRise 7s ease-in-out infinite',
+                wiggle: 'wiggle 2.5s ease-in-out infinite',
             },
             keyframes: {
                 float: {
@@ -101,6 +143,30 @@ export default {
                 fadeUp: {
                     '0%': { opacity: '0', transform: 'translateY(16px)' },
                     '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                swim: {
+                    '0%, 100%': { transform: 'translateX(0) translateY(0) scaleX(1)' },
+                    '25%': { transform: 'translateX(12px) translateY(-6px) scaleX(1)' },
+                    '50%': { transform: 'translateX(0) translateY(-10px) scaleX(-1)' },
+                    '75%': { transform: 'translateX(-12px) translateY(-4px) scaleX(-1)' },
+                },
+                drift: {
+                    '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
+                    '33%': { transform: 'translate(8px, -12px) rotate(3deg)' },
+                    '66%': { transform: 'translate(-6px, -6px) rotate(-2deg)' },
+                },
+                shimmer: {
+                    '0%, 100%': { opacity: '0.6' },
+                    '50%': { opacity: '1' },
+                },
+                bubbleRise: {
+                    '0%': { transform: 'translateY(0) scale(1)', opacity: '0.5' },
+                    '50%': { opacity: '0.8' },
+                    '100%': { transform: 'translateY(-120px) scale(1.2)', opacity: '0' },
+                },
+                wiggle: {
+                    '0%, 100%': { transform: 'rotate(-3deg)' },
+                    '50%': { transform: 'rotate(3deg)' },
                 },
             },
         },
